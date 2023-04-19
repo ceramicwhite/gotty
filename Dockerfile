@@ -1,10 +1,12 @@
 FROM golang:latest
 
-#WORKDIR /gotty
-#COPY . /gotty
-#RUN CGO_ENABLED=0 make
+RUN curl -fsSL https://deb.nodesource.com/setup_19.x | bash -
+RUN apt-get update
+RUN apt-get install -y nodejs
 
-RUN go install github.com/ceramicwhite/gotty@master
+WORKDIR /gotty
+COPY . /gotty
+RUN CGO_ENABLED=0 make
 
 FROM alpine:latest
 
@@ -15,6 +17,8 @@ RUN apk update && \
 
 WORKDIR /root
 
-COPY --from=0 /gotty/gotty /usr/bin/
+COPY --from=0 --chmod=+x /gotty/gotty /usr/bin/
+
+EXPOSE 8080
 
 CMD ["gotty",  "-w", "bash"]
