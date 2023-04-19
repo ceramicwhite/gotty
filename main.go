@@ -12,10 +12,10 @@ import (
 
 	cli "github.com/urfave/cli/v2"
 
-	"github.com/sorenisanerd/gotty/backend/localcommand"
-	"github.com/sorenisanerd/gotty/pkg/homedir"
-	"github.com/sorenisanerd/gotty/server"
-	"github.com/sorenisanerd/gotty/utils"
+	"github.com/ceramicwhite/gotty/backend/localcommand"
+	"github.com/ceramicwhite/gotty/pkg/homedir"
+	"github.com/ceramicwhite/gotty/server"
+	"github.com/ceramicwhite/gotty/utils"
 )
 
 func main() {

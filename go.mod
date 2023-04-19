@@ -1,4 +1,4 @@
-module github.com/sorenisanerd/gotty
+module github.com/ceramicwhite/gotty
 
 go 1.16
 
