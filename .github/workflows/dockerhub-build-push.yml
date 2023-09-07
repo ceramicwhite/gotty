@@ -3,6 +3,9 @@ name: Build on master schedule
 on:
   schedule:
   - cron: "0 2 15 * *"
+  push:
+    branches:
+      - master
 
 env:
   DOCKER_CLI_EXPERIMENTAL: enabled
