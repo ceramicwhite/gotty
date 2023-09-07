@@ -35,16 +35,7 @@ jobs:
       - name: Run Docker buildx for master
         run: |
           docker buildx build \
-          --platform linux/386,linux/ppc64le \
-          --file ./Dockerfile \
-          --build-arg GIT_TAG=master \
-          --tag ${{ secrets.DOCKERHUB_USERNAME }}/gotty:dev \
-          --push .
-          
-      - name: Run Docker buildx for master
-        run: |
-          docker buildx build \
-          --platform linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7 \
+          --platform linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7,linux/386,linux/ppc64le \
           --file ./Dockerfile \
           --build-arg GIT_TAG=master \
           --tag ${{ secrets.DOCKERHUB_USERNAME }}/gotty:latest \
