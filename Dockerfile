@@ -1,8 +1,7 @@
 FROM golang:latest
 
-RUN curl -fsSL https://deb.nodesource.com/setup_19.x | bash -
-RUN apt-get update
-RUN apt-get install -y nodejs
+RUN apt-get update && \
+    apt-get install -y nodejs npm
 
 WORKDIR /gotty
 COPY . /gotty
@@ -10,10 +9,14 @@ RUN CGO_ENABLED=0 make
 
 FROM alpine:latest
 
-RUN apk update && \
-    apk upgrade && \
-    apk --no-cache add ca-certificates && \
-    apk add bash
+RUN apk --update add \
+        ca-certificates \
+        tzdata \
+        bash \
+    && \
+        update-ca-certificates \
+    && \
+        apk add --upgrade bash
 
 WORKDIR /root
 
@@ -21,4 +24,4 @@ COPY --from=0 --chmod=+x /gotty/gotty /usr/bin/
 
 EXPOSE 8080
 
-CMD ["gotty",  "-w", "bash"]
+CMD [ "gotty", "--port", "8080", "--permit-write", "--title-format", "Gotty Terminal", "bash" ]
